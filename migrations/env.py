@@ -7,6 +7,7 @@ from alembic import context
 
 from llm_eval_lab.config import settings
 from llm_eval_lab.db import Base
+import llm_eval_lab.models  # noqa: F401 — registers ORM models on Base.metadata
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

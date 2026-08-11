@@ -24,3 +24,10 @@ dev = [
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
 ]
+
+[tool.pytest.ini_options]
+# ORM model is named TestCase (domain term, matches the eval-platform vocabulary
+# used throughout) — not a pytest test class; silence the collection warning.
+filterwarnings = [
+    "ignore:cannot collect test class 'TestCase':pytest.PytestCollectionWarning",
+]
