@@ -8,6 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from llm_eval_lab.db import Base
 
 if TYPE_CHECKING:
+    from llm_eval_lab.models.evaluation_result import EvaluationResult
     from llm_eval_lab.models.experiment_run import ExperimentRun
     from llm_eval_lab.models.test_case import TestCase
 
@@ -31,3 +32,6 @@ class Response(Base):
 
     experiment_run: Mapped["ExperimentRun"] = relationship(back_populates="responses")
     test_case: Mapped["TestCase"] = relationship()
+    evaluation_results: Mapped[list["EvaluationResult"]] = relationship(
+        back_populates="response", cascade="all, delete-orphan"
+    )
