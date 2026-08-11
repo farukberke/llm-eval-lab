@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from llm_eval_lab.models import Dataset, TestCase
@@ -15,6 +16,39 @@ def create_dataset(
     session.add(dataset)
     session.flush()
     return dataset
+
+
+def get_dataset(session: Session, dataset_id: int) -> Dataset | None:
+    return session.get(Dataset, dataset_id)
+
+
+def list_datasets(session: Session) -> list[Dataset]:
+    return list(session.scalars(select(Dataset).order_by(Dataset.id)))
+
+
+def update_dataset(
+    session: Session,
+    dataset_id: int,
+    name: str | None = None,
+    description: str | None = None,
+) -> Dataset:
+    dataset = session.get(Dataset, dataset_id)
+    if dataset is None:
+        raise ValueError(f"No dataset with id={dataset_id}")
+    if name is not None:
+        dataset.name = name
+    if description is not None:
+        dataset.description = description
+    session.flush()
+    return dataset
+
+
+def delete_dataset(session: Session, dataset_id: int) -> None:
+    dataset = session.get(Dataset, dataset_id)
+    if dataset is None:
+        raise ValueError(f"No dataset with id={dataset_id}")
+    session.delete(dataset)
+    session.flush()
 
 
 def add_test_case(

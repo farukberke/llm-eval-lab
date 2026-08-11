@@ -6,10 +6,12 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.19.1",
+    "fastapi>=0.141.1",
     "pandas>=3.0.5",
     "psycopg[binary]>=3.3.4",
     "pydantic-settings>=2.15.0",
     "sqlalchemy>=2.0.51",
+    "uvicorn[standard]>=0.52.1",
 ]
 
 [project.scripts]
@@ -27,10 +29,11 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-# ORM model is named TestCase (domain term, matches the eval-platform vocabulary
-# used throughout) — not a pytest test class; silence the collection warning.
+# ORM model TestCase and its DTO TestCaseRead are domain terms (matches the
+# eval-platform vocabulary used throughout) — not pytest test classes; silence
+# the collection warning for both (prefix match, no trailing quote).
 filterwarnings = [
-    "ignore:cannot collect test class 'TestCase':pytest.PytestCollectionWarning",
+    "ignore:cannot collect test class 'TestCase:pytest.PytestCollectionWarning",
 ]
 markers = [
     "integration: hits a live Ollama server; excluded by default, run with `-m integration`",

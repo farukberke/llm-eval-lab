@@ -3,6 +3,11 @@ from typing import Any
 from sqlalchemy.orm import Session
 
 from llm_eval_lab.datasets.repository import add_test_case, create_dataset
+from llm_eval_lab.experiments.repository import (
+    create_experiment,
+    create_model_config,
+    create_prompt,
+)
 from llm_eval_lab.models import Dataset, Experiment, ModelConfig, Prompt, TestCase
 
 
@@ -35,12 +40,9 @@ def make_model_config(
     model_name: str = "qwen2.5:7b",
     parameters: dict[str, Any] | None = None,
 ) -> ModelConfig:
-    model_config = ModelConfig(
-        name=name, provider=provider, model_name=model_name, parameters=parameters
+    return create_model_config(
+        session, name=name, provider=provider, model_name=model_name, parameters=parameters
     )
-    session.add(model_config)
-    session.flush()
-    return model_config
 
 
 def make_prompt(
@@ -48,10 +50,7 @@ def make_prompt(
     name: str = "Test Prompt",
     template: str = "Answer concisely: {question}",
 ) -> Prompt:
-    prompt = Prompt(name=name, template=template)
-    session.add(prompt)
-    session.flush()
-    return prompt
+    return create_prompt(session, name=name, template=template)
 
 
 def make_experiment(
@@ -62,13 +61,11 @@ def make_experiment(
     name: str = "Test Experiment",
     description: str | None = None,
 ) -> Experiment:
-    experiment = Experiment(
+    return create_experiment(
+        session,
         name=name,
-        description=description,
         dataset_id=dataset_id,
         model_config_id=model_config_id,
         prompt_id=prompt_id,
+        description=description,
     )
-    session.add(experiment)
-    session.flush()
-    return experiment
