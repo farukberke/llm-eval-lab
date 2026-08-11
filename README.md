@@ -1,5 +1,9 @@
 # LLM Evaluation Lab
 
+[![tests](https://github.com/farukberke/llm-eval-lab/actions/workflows/tests.yml/badge.svg)](https://github.com/farukberke/llm-eval-lab/actions/workflows/tests.yml)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 LLM konfigürasyonlarını değerlendirip karşılaştırmak için yerel (local) bir
 platform — bir QA (soru-cevap) veri setini [Ollama](https://ollama.com)
 üzerinden farklı modeller ve prompt'larla çalıştırır, her cevabı puanlar ve
@@ -10,6 +14,22 @@ Python ile uçtan uca yazıldı (FastAPI + PostgreSQL + SQLAlchemy/Alembic +
 Gradio), tamamen yerel — dışarıya bağlı bir LLM API'si veya bulut bağımlılığı
 yok. Her şey yerel bir Ollama sunucusuna ve Docker'lanmış bir Postgres
 örneğine karşı çalışır.
+
+## İçindekiler
+
+- [Neden bu proje](#neden-bu-proje)
+- [Özellikler](#özellikler)
+- [Ekran görüntüleri](#ekran-görüntüleri)
+- [Mimari](#mimari)
+- [Nasıl çalışır](#nasıl-çalışır)
+- [Teknoloji yığını](#teknoloji-yığını)
+- [Proje yapısı](#proje-yapısı)
+- [Kurulum](#kurulum)
+- [Örnek: gerçek değerlendirme çıktısı](#örnek-gerçek-değerlendirme-çıktısı)
+- [API](#api)
+- [Gradio arayüzünü kullanma](#gradio-arayüzünü-kullanma)
+- [Testleri çalıştırma](#testleri-çalıştırma)
+- [Kapsam](#kapsam)
 
 ## Neden bu proje
 
@@ -43,6 +63,17 @@ agregasyona ihtiyaç duyana kadar eklenmedi.
   tamamı FastAPI üzerinden dışarı açılmış ve Swagger UI ile belgelenmiştir.
 - **Demo arayüzü** — Swagger'la uğraşmadan tüm akışı (dataset, iki model ve
   bir prompt seçip tek butona basarak) çalıştıran bir Gradio sayfası.
+
+## Ekran görüntüleri
+
+**Gradio demo — gerçek bir Qwen 2.5 7B vs Llama 3.2 3B karşılaştırması,
+uçtan uca çalıştırılmış:**
+
+![Gradio karşılaştırma ekranı](assets/screenshots/gradio-comparison.png)
+
+**FastAPI Swagger UI (`/docs`) — tüm endpoint'ler ve şemalar:**
+
+![Swagger UI](assets/screenshots/swagger-docs.png)
 
 ## Mimari
 

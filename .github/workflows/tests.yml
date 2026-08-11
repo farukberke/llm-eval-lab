@@ -1,0 +1,47 @@
+name: tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: llm_eval
+          POSTGRES_PASSWORD: llm_eval
+          POSTGRES_DB: llm_eval_lab
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U llm_eval -d llm_eval_lab"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql+psycopg://llm_eval:llm_eval@localhost:5433/llm_eval_lab
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Run migrations
+        run: uv run alembic upgrade head
+
+      - name: Run unit tests
+        run: uv run pytest

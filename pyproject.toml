@@ -3,6 +3,7 @@ name = "llm-eval-lab"
 version = "0.1.0"
 description = "A local LLM evaluation platform: run a QA dataset through different Ollama models/prompts, score responses, and compare configurations side by side."
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.19.1",
