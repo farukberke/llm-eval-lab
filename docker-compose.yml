@@ -16,5 +16,18 @@ services:
       timeout: 5s
       retries: 10
 
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://llm_eval:llm_eval@db:5432/llm_eval_lab
+      OLLAMA_HOST: http://host.docker.internal:11434
+      OLLAMA_DEFAULT_MODEL: qwen2.5:7b
+    ports:
+      - "8000:8000"
+
 volumes:
   db_data:
