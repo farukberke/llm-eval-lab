@@ -31,3 +31,7 @@ dev = [
 filterwarnings = [
     "ignore:cannot collect test class 'TestCase':pytest.PytestCollectionWarning",
 ]
+markers = [
+    "integration: hits a live Ollama server; excluded by default, run with `-m integration`",
+]
+addopts = "-m 'not integration'"
