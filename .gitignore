@@ -15,3 +15,6 @@ wheels/
 # IDE
 .vscode/
 .idea/
+
+# Internal planning doc — not part of the public repo
+docs/development-plan.md
