@@ -248,24 +248,24 @@ komutunun gerçek çıktısı — aynı 10 soruluk dataset ve aynı prompt üzer
 olarak çalışan bir Ollama sunucusuna karşı karşılaştırılması:
 
 ```
-Run 124 - UI Demo - Qwen 2.5 7B - QA Model Comparison - Concise QA Prompt (qwen2.5:7b)
+Run 165 - UI Demo - Qwen 2.5 7B - QA Model Comparison - Concise QA Prompt (qwen2.5:7b)
   success_rate=100.0% (10/10)
-  avg_latency_ms=591.3
-  avg_prompt_tokens=45.6  avg_completion_tokens=7.8
-  exact_match: avg=0.300
-  normalized_similarity: avg=0.598
+  avg_latency_ms=687.9
+  avg_prompt_tokens=45.6  avg_completion_tokens=6.7
+  exact_match: avg=0.500
+  normalized_similarity: avg=0.731
 
-Run 125 - UI Demo - Llama 3.2 3B - QA Model Comparison - Concise QA Prompt (llama3.2:3b)
+Run 166 - UI Demo - Llama 3.2 3B - QA Model Comparison - Concise QA Prompt (llama3.2:3b)
   success_rate=100.0% (10/10)
-  avg_latency_ms=466.3
-  avg_prompt_tokens=41.5  avg_completion_tokens=15.8
+  avg_latency_ms=595.4
+  avg_prompt_tokens=41.5  avg_completion_tokens=15.6
   exact_match: avg=0.000
-  normalized_similarity: avg=0.303
+  normalized_similarity: avg=0.337
 ```
 
 Daha güçlü model (`qwen2.5:7b`) her iki metrikte de daha yüksek skor
 alıyor — özenle seçilmiş bir örnek değil, gerçek ve tekrarlanabilir bir fark.
-Aynı karşılaştırma `GET /compare?run_ids=124&run_ids=125` üzerinden veya
+Aynı karşılaştırma `GET /compare?run_ids=165&run_ids=166` üzerinden veya
 Gradio arayüzünden de erişilebilir.
 
 ## API
